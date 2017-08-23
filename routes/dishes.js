@@ -42,4 +42,37 @@ router.route('/')
 		});
 	});
 
+router.route('/:dishId')
+	.get(verify.verifyOrdinaryUser, function(req, res, next) {
+		Dish.findById(req.params.dishId)
+			.populate('comments.postedBy')
+			.exec(function(err, dish) {
+				if (err) throw err;
+				res.json(dish);
+			});
+	})
+
+	.put(verify.verifyOrdinaryUser, verify.verifyAdmin, function(req, res, next) {
+		Dish.findByIdAndUpdate(req.params.dishId, {
+			$set: req.body
+		}, {
+			new: true
+		}, function(err, dish) {
+			if (err) throw err;
+			res.json(dish);
+		});
+	})
+
+	.delete(verify.verifyOrdinaryUser, verify.verifyAdmin, function(req, res, next) {
+		Dish.findByIdAndRemove(req.params.dishId, function(err, dish) {
+			if (err) throw err;
+
+			var id = dish._id;
+			res.writeHead(200, {
+				'Content-Type': 'text/plain'
+			});
+			res.end('Successfully deleted the dish with id: ' + id);
+		});
+	});
+
 module.exports = router;
