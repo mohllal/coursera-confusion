@@ -116,4 +116,57 @@ router.route('/:dishId/comments')
 		});
 	});
 
+router.route('/:dishId/comments/:commentId')
+	.all(verify.verifyOrdinaryUser)
+
+	.get(function(req, res, next) {
+		Dish.findById(req.params.dishId)
+			.populate('comments.postedBy')
+			.exec(function(err, dish) {
+				if (err) throw err;
+				res.json(dish.comments.id(req.params.commentId));
+			});
+	})
+
+	.put(function(req, res, next) {
+		// We delete the existing commment and insert the updated
+		// comment as a new comment
+		Dish.findById(req.params.dishId, function(err, dish) {
+			if (err) throw err;
+			if (dish.comments.id(req.params.commentId).postedBy != req.decoded._doc._id) {
+				var authErr = new Error("You are not authorized to perform this operation!");
+				authErr.status = 403;
+				return next(authErr);
+			}
+
+			dish.comments.id(req.params.commentId).remove();
+			req.body.postedBy = req.decoded._doc._id;
+			dish.comments.push(req.body);
+			dish.save(function(err, dish) {
+				if (err) throw err;
+				console.log('Updated Comment!');
+				res.json(dish);
+			});
+		});
+	})
+
+	.delete(function(req, res, next) {
+		Dish.findById(req.params.dishId, function(err, dish) {
+			if (dish.comments.id(req.params.commentId).postedBy != req.decoded._doc._id) {
+				var authErr = new Error("You are not authorized to perform this operation!");
+				authErr.status = 403;
+				return next(authErr);
+			}
+			dish.comments.id(req.params.commentId).remove();
+			dish.save(function(err, dish) {
+				if (err) throw err;
+
+				res.writeHead(200, {
+					'Content-Type': 'text/plain'
+				});
+				res.end('Successfully deleted the comment with id: ' + req.params.commentId);
+			});
+		});
+	});
+
 module.exports = router;
