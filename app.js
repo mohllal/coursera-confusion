@@ -13,6 +13,7 @@ var users = require('./routes/users');
 var dishes = require('./routes/dishes');
 var leaders = require('./routes/leaders');
 var promotions = require('./routes/promotions');
+var favorites = require('./routes/favorites');
 
 var User = require('./models/users');
 var config = require('./config');
@@ -53,6 +54,7 @@ app.use('/users', users);
 app.use('/dishes', dishes);
 app.use('/leaders', leaders);
 app.use('/promotions', promotions);
+app.use('/favorites', favorites);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
