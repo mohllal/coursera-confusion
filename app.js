@@ -20,6 +20,15 @@ var config = require('./config');
 
 var app = express();
 
+// Secure traffic only
+app.all('*', function(req, res, next) {
+	console.log('req start: ', req.secure, req.hostname, req.url, app.get('port'));
+	if (req.secure) {
+		return next();
+	}
+	res.redirect('https://' + req.hostname + ':' + app.get('securePort') + req.url);
+});
+
 mongoose.connect(config.mongoUrl);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
