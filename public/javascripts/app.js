@@ -9,6 +9,9 @@ angular.module('confusionApp', ['ui.router', 'ngResource', 'ngDialog'])
 				views: {
 					'header': {
 						templateUrl: 'templates/header.html'
+					},
+					'footer': {
+						templateUrl: 'templates/footer.html'
 					}
 				}
 			});
