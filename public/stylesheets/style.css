@@ -1,8 +1,85 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    text-align: center;
+    padding: 50px 0px 0px 0px;
+    z-index: 0;
 }
 
 a {
-  color: #00B7FF;
+    color: #303f9f;
+}
+
+.row-header {
+    margin: 0px auto;
+    padding: 0px 0px;
+}
+
+.row-content {
+    margin: 0px auto;
+    padding: 50px 0px;
+    border-bottom: 1px ridge;
+    min-height: 400px;
+}
+
+.row-footer {
+    margin: 0px auto;
+    padding: 20px 0px;
+    background-color: #AfAfAf;
+}
+
+.jumbotron {
+    margin: 0px auto;
+    padding: 70px 30px;
+    background: #7986CB;
+    color: floralwhite;
+}
+
+.navbar-inverse {
+    background: #303f9f;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav>.active>a {
+    background: #1a237e;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav>.active>a:hover {
+    background: #1a237e;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav>.active>a:focus {
+    background: #1a237e;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav>.open>a {
+    background: #1a237e;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav>.open>a:hover {
+    background: #1a237e;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav>.open>a:focus {
+    background: #1a237e;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+    background-color: #303f9f;
+    color: #eeeeee;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover {
+    color: #000000;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu {
+    background-color: #303f9f;
+    color: #eeeeee;
 }
