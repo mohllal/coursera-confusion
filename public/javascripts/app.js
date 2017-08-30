@@ -8,7 +8,8 @@ angular.module('confusionApp', ['ui.router', 'ngResource', 'ngDialog'])
 				url: '/',
 				views: {
 					'header': {
-						templateUrl: 'templates/header.html'
+						templateUrl: 'templates/header.html',
+						controller: 'HeaderController'
 					},
 					'footer': {
 						templateUrl: 'templates/footer.html'
