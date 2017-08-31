@@ -10,8 +10,8 @@ var verify = require('../utils/verify');
 router.use(bodyParser.json());
 
 router.route('/')
-	.get(verify.verifyOrdinaryUser, function(req, res, next) {
-		Leader.find({}, function(err, leader) {
+	.get(function(req, res, next) {
+		Leader.find(req.query, function(err, leader) {
 			if (err) throw err;
 			res.json(leader);
 		});
@@ -41,7 +41,7 @@ router.route('/')
 	});
 
 router.route('/:leaderId')
-	.get(verify.verifyOrdinaryUser, function(req, res, next) {
+	.get(function(req, res, next) {
 		Leader.findById(req.params.leaderId, function(err, leader) {
 			if (err) throw err;
 			res.json(leader);

@@ -10,7 +10,7 @@ var verify = require('../utils/verify');
 router.use(bodyParser.json());
 
 router.route('/')
-	.get(verify.verifyOrdinaryUser, function(req, res, next) {
+	.get(function(req, res, next) {
 		Promotion.find({}, function(err, promotion) {
 			if (err) throw err;
 			res.json(promotion);
@@ -42,7 +42,7 @@ router.route('/')
 	});
 
 router.route('/:promoId')
-	.get(verify.verifyOrdinaryUser, function(req, res, next) {
+	.get(function(req, res, next) {
 		Promotion.findById(req.params.promoId, function(err, promotion) {
 			if (err) throw err;
 			res.json(promotion);
