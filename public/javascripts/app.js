@@ -15,6 +15,17 @@ angular.module('confusionApp', ['ui.router', 'ngResource', 'ngDialog'])
 						templateUrl: 'templates/footer.html'
 					}
 				}
+			})
+
+			// route for the aboutus page
+			.state('app.aboutus', {
+				url: 'aboutus',
+				views: {
+					'content@': {
+						templateUrl: 'templates/aboutus.html',
+						controller: 'AboutController'
+					}
+				}
 			});
 
 		$urlRouterProvider.otherwise('/');

@@ -1,7 +1,7 @@
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    text-align: center;
+    align: center;
     padding: 50px 0px 0px 0px;
     z-index: 0;
 }
@@ -82,4 +82,21 @@ a {
 .navbar-inverse .navbar-nav .open .dropdown-menu {
     background-color: #303f9f;
     color: #eeeeee;
+}
+
+address {
+    color: #0f0f0f;
+    font-size: 80%;
+    margin: 0px;
+}
+
+.tab-content {
+    border-bottom: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    padding: 10px;
+}
+
+.affix {
+    top: 100px;
 }
