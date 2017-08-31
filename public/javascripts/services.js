@@ -136,4 +136,12 @@ angular.module('confusionApp')
 		loadUserCredentials();
 
 		return authFac;
+	}])
+
+	.factory('corporateFactory', ['$resource', 'baseURL', function($resource, baseURL) {
+		return $resource(baseURL + "leaders/:id", null, {
+			'update': {
+				method: 'PUT'
+			}
+		});
 	}]);
