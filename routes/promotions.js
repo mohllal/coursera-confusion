@@ -12,14 +12,14 @@ router.use(bodyParser.json());
 router.route('/')
 	.get(function(req, res, next) {
 		Promotion.find({}, function(err, promotion) {
-			if (err) throw err;
+			if (err) next(err);
 			res.json(promotion);
 		});
 	})
 
 	.post(verify.verifyOrdinaryUser, verify.verifyAdmin, function(req, res, next) {
 		Promotion.create(req.body, function(err, promotion) {
-			if (err) throw err;
+			if (err) next(err);
 			console.log('Promotion created!');
 			var id = promotion._id;
 
@@ -32,7 +32,7 @@ router.route('/')
 
 	.delete(verify.verifyOrdinaryUser, verify.verifyAdmin, function(req, res, next) {
 		Promotion.remove({}, function(err, promotions) {
-			if (err) throw err;
+			if (err) next(err);
 
 			res.writeHead(200, {
 				'Content-Type': 'text/plain'
@@ -44,7 +44,7 @@ router.route('/')
 router.route('/:promoId')
 	.get(function(req, res, next) {
 		Promotion.findById(req.params.promoId, function(err, promotion) {
-			if (err) throw err;
+			if (err) next(err);
 			res.json(promotion);
 		});
 	})
@@ -55,14 +55,14 @@ router.route('/:promoId')
 		}, {
 			new: true
 		}, function(err, promotion) {
-			if (err) throw err;
+			if (err) next(err);
 			res.json(promotion);
 		});
 	})
 
 	.delete(verify.verifyOrdinaryUser, verify.verifyAdmin, function(req, res, next) {
 		Promotion.findByIdAndRemove(req.params.promoId, function(err, promotion) {
-			if (err) throw err;
+			if (err) next(err);
 
 			var id = promotion._id;
 			res.writeHead(200, {

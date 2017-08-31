@@ -8,7 +8,7 @@ var verify = require('../utils/verify');
 /* GET users listing. */
 router.get('/', verify.verifyOrdinaryUser, verify.verifyAdmin, function(req, res, next) {
 	User.find({}, function(err, users) {
-		if (err) throw err;
+		if (err) next(err);
 		res.json(users);
 	});
 });

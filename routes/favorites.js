@@ -19,7 +19,7 @@ router.route('/')
 			.populate('postedBy')
 			.populate('dishes')
 			.exec(function(err, favorites) {
-				if (err) throw err;
+				if (err) next(err);
 				res.json(favorites);
 			});
 	})
@@ -28,7 +28,7 @@ router.route('/')
 		Favorite.findOne({
 			'postedBy': req.decoded._doc._id
 		}, function(err, favorite) {
-			if (err) throw err;
+			if (err) next(err);
 			if (!favorite) {
 				Favorite.create(req.body, function(err, favorite) {
 					if (err) throw err;
@@ -36,7 +36,7 @@ router.route('/')
 					favorite.postedBy = req.decoded._doc._id;
 					favorite.dishes.push(req.body._id);
 					favorite.save(function(err, favorite) {
-						if (err) throw err;
+						if (err) next(err);
 						res.json(favorite);
 					});
 				});
@@ -47,7 +47,7 @@ router.route('/')
 					favorite.dishes.push(dish);
 				}
 				favorite.save(function(err, favorite) {
-					if (err) throw err;
+					if (err) next(err);
 					res.json(favorite);
 				});
 			}
@@ -58,7 +58,7 @@ router.route('/')
 		Favorite.remove({
 			'postedBy': req.decoded._doc._id
 		}, function(err, favorites) {
-			if (err) throw err;
+			if (err) next(err);
 			res.json(favorites);
 		});
 	});
@@ -72,7 +72,7 @@ router.route('/:dishId')
 				dishes: req.params.dishId
 			}
 		}, function(err, favorite) {
-			if (err) throw err;
+			if (err) next(err);
 			Favorite.findOne({
 				'postedBy': req.decoded._doc._id
 			}, function(err, favorite) {
