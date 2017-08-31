@@ -72,4 +72,8 @@ angular.module('confusionApp')
 			return $state.is(curstate);
 		};
 
+	}])
+
+	.controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
+		$scope.leaders = corporateFactory.query();
 	}]);
