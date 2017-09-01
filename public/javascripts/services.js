@@ -152,4 +152,24 @@ angular.module('confusionApp')
 				method: 'PUT'
 			}
 		});
+	}])
+
+	.factory('menuFactory', ['$resource', 'baseURL', function($resource, baseURL) {
+		return $resource(baseURL + "dishes/:id", null, {
+			'update': {
+				method: 'PUT'
+			}
+		});
+	}])
+
+	.factory('favoriteFactory', ['$resource', 'baseURL', function($resource, baseURL) {
+		return $resource(baseURL + "favorites/:id", null, {
+			'update': {
+				method: 'PUT'
+			},
+			'query': {
+				method: 'GET',
+				isArray: false
+			}
+		});
 	}]);
