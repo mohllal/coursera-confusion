@@ -144,4 +144,12 @@ angular.module('confusionApp')
 				method: 'PUT'
 			}
 		});
+	}])
+
+	.factory('feedbackFactory', ['$resource', 'baseURL', function($resource, baseURL) {
+		return $resource(baseURL + "feedback/:id", null, {
+			'update': {
+				method: 'PUT'
+			}
+		});
 	}]);
