@@ -26,6 +26,17 @@ angular.module('confusionApp', ['ui.router', 'ngResource', 'ngDialog'])
 						controller: 'AboutController'
 					}
 				}
+			})
+
+			// route for the contactus page
+			.state('app.contactus', {
+				url: 'contactus',
+				views: {
+					'content@': {
+						templateUrl: 'templates/contactus.html',
+						controller: 'ContactController'
+					}
+				}
 			});
 
 		$urlRouterProvider.otherwise('/');
