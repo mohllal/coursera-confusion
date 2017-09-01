@@ -76,4 +76,46 @@ angular.module('confusionApp')
 
 	.controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
 		$scope.leaders = corporateFactory.query();
+	}])
+
+	.controller('ContactController', ['$scope', 'feedbackFactory', function($scope, feedbackFactory) {
+		$scope.feedback = {
+			mychannel: "",
+			firstName: "",
+			lastName: "",
+			agree: false,
+			email: ""
+		};
+
+		var channels = [
+			{
+				value: "tel",
+				label: "Tel."
+			},
+			{
+				value: "Email",
+				label: "Email"
+			}
+		];
+
+		$scope.channels = channels;
+		$scope.invalidChannelSelection = false;
+
+		$scope.sendFeedback = function() {
+			if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
+				$scope.invalidChannelSelection = true;
+			} else {
+				$scope.invalidChannelSelection = false;
+				feedbackFactory.save($scope.feedback);
+				$scope.feedback = {
+					mychannel: "",
+					firstName: "",
+					lastName: "",
+					agree: false,
+					email: ""
+				};
+				$scope.feedback.mychannel = "";
+				$scope.feedbackForm.$setPristine();
+			}
+		};
 	}]);
