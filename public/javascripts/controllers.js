@@ -118,4 +118,112 @@ angular.module('confusionApp')
 				$scope.feedbackForm.$setPristine();
 			}
 		};
+	}])
+
+	.controller('FavoriteController', ['$scope', '$state', 'favoriteFactory', function($scope, $state, favoriteFactory) {
+		$scope.tab = 1;
+		$scope.filtText = '';
+		$scope.showDetails = false;
+		$scope.showDelete = false;
+		$scope.showMenu = false;
+		$scope.message = "Loading ...";
+
+		favoriteFactory.query(
+			function(response) {
+				$scope.dishes = response.dishes;
+				$scope.showMenu = true;
+			},
+			function(response) {
+				$scope.message = "Error: " + response.status + " " + response.statusText;
+			});
+
+		$scope.select = function(setTab) {
+			$scope.tab = setTab;
+
+			if (setTab === 2) {
+				$scope.filtText = "appetizer";
+			} else if (setTab === 3) {
+				$scope.filtText = "mains";
+			} else if (setTab === 4) {
+				$scope.filtText = "dessert";
+			} else {
+				$scope.filtText = "";
+			}
+		};
+
+		$scope.isSelected = function(checkTab) {
+			return ($scope.tab === checkTab);
+		};
+
+		$scope.toggleDetails = function() {
+			$scope.showDetails = !$scope.showDetails;
+		};
+
+		$scope.toggleDelete = function() {
+			$scope.showDelete = !$scope.showDelete;
+		};
+
+		$scope.deleteFavorite = function(dishid) {
+			console.log('Delete favorites', dishid);
+			favoriteFactory.delete({
+				id: dishid
+			});
+			$scope.showDelete = !$scope.showDelete;
+			$state.go($state.current, {}, {
+				reload: true
+			});
+		};
+	}])
+
+	.controller('MenuController', ['$scope', 'menuFactory', 'favoriteFactory', function($scope, menuFactory, favoriteFactory) {
+		$scope.tab = 1;
+		$scope.filtText = '';
+		$scope.showDetails = false;
+		$scope.showFavorites = false;
+		$scope.showMenu = false;
+		$scope.message = "Loading ...";
+
+		menuFactory.query(
+			function(response) {
+				$scope.dishes = response;
+				$scope.showMenu = true;
+
+			},
+			function(response) {
+				$scope.message = "Error: " + response.status + " " + response.statusText;
+			});
+
+		$scope.select = function(setTab) {
+			$scope.tab = setTab;
+
+			if (setTab === 2) {
+				$scope.filtText = "appetizer";
+			} else if (setTab === 3) {
+				$scope.filtText = "mains";
+			} else if (setTab === 4) {
+				$scope.filtText = "dessert";
+			} else {
+				$scope.filtText = "";
+			}
+		};
+
+		$scope.isSelected = function(checkTab) {
+			return ($scope.tab === checkTab);
+		};
+
+		$scope.toggleDetails = function() {
+			$scope.showDetails = !$scope.showDetails;
+		};
+
+		$scope.toggleFavorites = function() {
+			$scope.showFavorites = !$scope.showFavorites;
+		};
+
+		$scope.addToFavorites = function(dishid) {
+			console.log('Add to favorites', dishid);
+			favoriteFactory.save({
+				_id: dishid
+			});
+			$scope.showFavorites = !$scope.showFavorites;
+		};
 	}]);
