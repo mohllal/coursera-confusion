@@ -37,6 +37,17 @@ angular.module('confusionApp', ['ui.router', 'ngResource', 'ngDialog'])
 						controller: 'ContactController'
 					}
 				}
+			})
+
+			// route for the menu page
+			.state('app.menu', {
+				url: 'menu',
+				views: {
+					'content@': {
+						templateUrl: 'templates/menu.html',
+						controller: 'MenuController'
+					}
+				}
 			});
 
 		$urlRouterProvider.otherwise('/');

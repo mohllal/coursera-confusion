@@ -199,7 +199,7 @@ angular.module('confusionApp')
 			if (setTab === 2) {
 				$scope.filtText = "appetizer";
 			} else if (setTab === 3) {
-				$scope.filtText = "mains";
+				$scope.filtText = "main";
 			} else if (setTab === 4) {
 				$scope.filtText = "dessert";
 			} else {
