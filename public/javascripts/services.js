@@ -169,7 +169,7 @@ angular.module('confusionApp')
 			},
 			'query': {
 				method: 'GET',
-				isArray: false
+				isArray: true
 			}
 		});
 	}]);
