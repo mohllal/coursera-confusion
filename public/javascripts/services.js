@@ -172,4 +172,23 @@ angular.module('confusionApp')
 				isArray: true
 			}
 		});
+	}])
+
+	.factory('commentFactory', ['$resource', 'baseURL', function($resource, baseURL) {
+		return $resource(baseURL + "dishes/:id/comments/:commentId", {
+			id: "@Id",
+			commentId: "@CommentId"
+		}, {
+			'update': {
+				method: 'PUT'
+			}
+		});
+	}])
+
+	.factory('promotionFactory', ['$resource', 'baseURL', function($resource, baseURL) {
+		return $resource(baseURL + "promotions/:id", null, {
+			'update': {
+				method: 'PUT'
+			}
+		});
 	}]);
