@@ -267,4 +267,50 @@ angular.module('confusionApp')
 				comment: ""
 			};
 		};
+	}])
+
+	.controller('HomeController', ['$scope', 'menuFactory', 'corporateFactory', 'promotionFactory', function($scope, menuFactory, corporateFactory, promotionFactory) {
+		$scope.showDish = false;
+		$scope.showLeader = false;
+		$scope.showPromotion = false;
+		$scope.message = "Loading ...";
+		var leaders = corporateFactory.query({
+				featured: "true"
+			})
+			.$promise.then(
+				function(response) {
+					var leaders = response;
+					$scope.leader = leaders[0];
+					$scope.showLeader = true;
+				},
+				function(response) {
+					$scope.message = "Error: " + response.status + " " + response.statusText;
+				}
+			);
+		$scope.dish = menuFactory.query({
+				featured: "true"
+			})
+			.$promise.then(
+				function(response) {
+					var dishes = response;
+					$scope.dish = dishes[0];
+					$scope.showDish = true;
+				},
+				function(response) {
+					$scope.message = "Error: " + response.status + " " + response.statusText;
+				}
+			);
+		var promotions = promotionFactory.query({
+				featured: "true"
+			})
+			.$promise.then(
+				function(response) {
+					var promotions = response;
+					$scope.promotion = promotions[0];
+					$scope.showPromotion = true;
+				},
+				function(response) {
+					$scope.message = "Error: " + response.status + " " + response.statusText;
+				}
+			);
 	}]);
