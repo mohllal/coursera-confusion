@@ -59,6 +59,17 @@ angular.module('confusionApp', ['ui.router', 'ngResource', 'ngDialog'])
 						controller: 'FavoriteController'
 					}
 				}
+			})
+
+			// route for the dishdetail page
+			.state('app.dishdetails', {
+				url: 'menu/:id',
+				views: {
+					'content@': {
+						templateUrl: 'templates/dishdetail.html',
+						controller: 'DishDetailController'
+					}
+				}
 			});
 
 		$urlRouterProvider.otherwise('/');
