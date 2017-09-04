@@ -226,4 +226,45 @@ angular.module('confusionApp')
 			});
 			$scope.showFavorites = !$scope.showFavorites;
 		};
+	}])
+
+	.controller('DishDetailController', ['$scope', '$state', '$stateParams', 'menuFactory', 'commentFactory', function($scope, $state, $stateParams, menuFactory, commentFactory) {
+		$scope.dish = {};
+		$scope.showDish = false;
+		$scope.message = "Loading ...";
+
+		$scope.dish = menuFactory.get({
+				id: $stateParams.id
+			})
+			.$promise.then(
+				function(response) {
+					$scope.dish = response;
+					$scope.showDish = true;
+				},
+				function(response) {
+					$scope.message = "Error: " + response.status + " " + response.statusText;
+				}
+			);
+
+		$scope.mycomment = {
+			rating: 5,
+			comment: ""
+		};
+
+		$scope.submitComment = function() {
+			commentFactory.save({
+				id: $stateParams.id
+			}, $scope.mycomment);
+
+			$state.go($state.current, {}, {
+				reload: true
+			});
+
+			$scope.commentForm.$setPristine();
+
+			$scope.mycomment = {
+				rating: 5,
+				comment: ""
+			};
+		};
 	}]);
