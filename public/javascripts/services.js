@@ -147,7 +147,7 @@ angular.module('confusionApp')
 	}])
 
 	.factory('feedbackFactory', ['$resource', 'baseURL', function($resource, baseURL) {
-		return $resource(baseURL + "feedback/:id", null, {
+		return $resource(baseURL + "feedbacks/:id", null, {
 			'update': {
 				method: 'PUT'
 			}
