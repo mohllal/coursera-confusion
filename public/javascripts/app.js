@@ -11,6 +11,10 @@ angular.module('confusionApp', ['ui.router', 'ngResource', 'ngDialog'])
 						templateUrl: 'templates/header.html',
 						controller: 'HeaderController'
 					},
+					'content': {
+						templateUrl: 'templates/home.html',
+						controller: 'HomeController'
+					},
 					'footer': {
 						templateUrl: 'templates/footer.html'
 					}
